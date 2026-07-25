@@ -1,0 +1,106 @@
+model Category {
+    id          String     @id @default(uuid())
+    name        String     @unique
+    description String?
+    createdAt   DateTime   @default(now())
+    updatedAt   DateTime   @updatedAt
+    properties  Property[]
+
+    @@map("categories")
+}
+
+model Property {
+    id             String          @id @default(uuid())
+    title          String
+    description    String
+    location       String
+    price          Float
+    bedrooms       Int?
+    bathrooms      Int?
+    area           Float?
+    amenities      String[]
+    images         String[]
+    status         String          @default("available")
+    landlordId     String
+    categoryId     String
+    landlord       User            @relation(fields: [landlordId], references: [id], onDelete: Cascade)
+    category       Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+    rentalRequests RentalRequest[]
+    reviews        Review[]
+    createdAt      DateTime        @default(now())
+    updatedAt      DateTime        @updatedAt
+
+    @@map("properties")
+}
+
+enum RentalStatus {
+    pending
+    approved
+    rejected
+    active
+    completed
+    cancelled
+}
+
+model RentalRequest {
+    id           String       @id @default(uuid())
+    tenantId     String
+    propertyId   String
+    status       RentalStatus @default(pending)
+    moveInDate   DateTime?
+    message      String?
+    landlordNote String?
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
+    tenant       User         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+    property     Property     @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+    payment      Payment?
+
+    @@map("rental_requests")
+}
+
+enum PaymentProvider {
+    stripe
+    sslcommerz
+}
+
+enum PaymentStatus {
+    pending
+    completed
+    failed
+    refunded
+}
+
+model Payment {
+    id                String          @id @default(uuid())
+    rentalRequestId   String          @unique
+    amount            Float
+    currency          String          @default("usd")
+    provider          PaymentProvider
+    providerPaymentId String?
+    transactionId     String?
+    status            PaymentStatus   @default(pending)
+    paidAt            DateTime?
+    createdAt         DateTime        @default(now())
+    updatedAt         DateTime        @updatedAt
+    rentalRequest     RentalRequest   @relation(fields: [rentalRequestId], references: [id], onDelete: Cascade)
+    user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId            String
+
+    @@map("payments")
+}
+
+model Review {
+    id         String   @id @default(uuid())
+    tenantId   String
+    propertyId String
+    rating     Int
+    comment    String?
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    tenant     User     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+    property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+    @@unique([tenantId, propertyId])
+    @@map("reviews")
+}
