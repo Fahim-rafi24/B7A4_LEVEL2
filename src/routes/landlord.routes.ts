@@ -8,8 +8,13 @@ const router = Router();
 
 router.use(authenticate, authorize('landlord', 'admin'));
 
-// post, put, delete apis
+
 router.get('/properties', propertyController.getLandlordProperties);
+router.post('/properties', propertyController.createProperty);
+router.put('/properties/:id', propertyController.updateProperty);
+router.delete('/properties/:id', propertyController.deleteProperty);
+
+
 router.get('/requests', rentalController.getLandlordRequests);
 router.patch('/requests/:id', rentalController.updateRentalStatus);
 

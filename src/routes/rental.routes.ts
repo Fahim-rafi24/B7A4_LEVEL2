@@ -7,7 +7,7 @@ const router = Router();
 
 router.use(authenticate);
 
-router.post('/', authorize('tenant', 'admin'), rentalController.createRental);
+router.post('/', authorize('tenant'), rentalController.createRental);
 router.get('/', rentalController.getUserRentals);
 router.get('/:id', rentalController.getRentalById);
 
