@@ -890,7 +890,7 @@ STRIPE_WEBHOOK_SECRET="whsec_..."
 ### 2. Clone & Setup Environment
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/Fahim-rafi24/B7A4_LEVEL2.git>
 cd B7A4_LEVEL2
 
 # Create .env file (see Environment Variables above)
