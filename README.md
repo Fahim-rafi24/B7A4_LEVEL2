@@ -94,6 +94,11 @@ sequenceDiagram
 
 ## 🗄️ Database Schema & Index Design
 
+
+### 🗄️ ERD Design
+🌐 [Live ERD URL](https://lucid.app/lucidchart/986ac4d3-9974-4d25-84a9-c265e86f3820/edit?viewport_loc=-1070%2C-2576%2C2911%2C1381%2C0_0&invitationId=inv_fa7adaa5-6988-4133-872b-b478fa452567)
+
+
 The database consists of **6 models** managed through **Prisma** with automated migrations.
 
 ```mermaid
