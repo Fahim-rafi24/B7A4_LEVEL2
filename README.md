@@ -942,6 +942,8 @@ npm start            # Runs compiled JS from /dist
 
 Use **Postman**, **Insomnia**, or **cURL** to interact with the API.
 
+> 📮 **Postman Collection** — A ready-to-use collection is included: **`RentNest - Rental Property Marketplace API.postman_collection.json`**. Import it into Postman, set the **`baseUrl`** variable to your server URL (default `http://localhost:5000`), and run the folders in order. It covers the full Tenant, Landlord, and Rental lifecycle flows. Auth uses **HTTP-Only cookies**, which Postman's cookie jar handles automatically — no manual token setup needed.
+
 For authenticated routes, ensure cookie support is enabled. The API uses HTTP-Only cookies — the `accessToken` cookie is automatically set on login/register and sent on subsequent requests.
 
 ### Available Seed Data
