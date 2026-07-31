@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const roleEnum = z.enum(['tenant', 'landlord']);
+const roleEnum = z.enum(['tenant', 'landlord', 'admin']);
 
 export const signupSchema = z.object({
     name: z.string().min(1, 'Name is required').max(100),
