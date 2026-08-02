@@ -22,14 +22,16 @@ export async function signup(req: Request, res: Response, next: NextFunction) {
 
         res.cookie('accessToken', tokens.accessToken, {
             httpOnly: true,
-            secure: env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: true,
+            // secure: env.NODE_ENV === 'production',
+            sameSite: 'none',
             maxAge: env.ACCESS_TOKEN_MAX_AGE,
         });
         res.cookie('refreshToken', tokens.refreshToken, {
             httpOnly: true,
-            secure: env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: true,
+            // secure: env.NODE_ENV === 'production',
+            sameSite: 'none',
             maxAge: env.REFRESH_TOKEN_MAX_AGE,
         });
 
