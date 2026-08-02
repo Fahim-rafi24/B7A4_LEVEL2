@@ -19,7 +19,8 @@ const app = express();
 app.use('/api/payments/webhook', express.raw({ type: 'application/json' }), paymentController.handleStripeWebhook);
 
 app.use(cors({
-    origin: env.SITE_URL,
+    // origin: env.SITE_URL,
+    origin: ['https://b7-a5-level-2.vercel.app'],
     credentials: true,
 }));
 app.use(express.json({
